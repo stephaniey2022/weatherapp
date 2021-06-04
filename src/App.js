@@ -14,8 +14,12 @@ class WeatherApp extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      isFetching: true, 
       hourlyClicked: false,
-      weeklyClicked: false
+      weeklyClicked: false,
+      high: 0,
+      low: 0, 
+      description: ""
     }
   }
 
@@ -27,6 +31,7 @@ class WeatherApp extends React.Component{
 
   //submit form
   getCurrent(){
+    this.setState({isFetching: false})
     console.log("current is loading")
     const apiKey = "0a6ebe98851dbd7808eb9f98908964cf";
     const url = `https://api.openweathermap.org/data/2.5/weather?id=4891382&appid=${apiKey}&units=metric`;
@@ -35,6 +40,12 @@ class WeatherApp extends React.Component{
       .then(data => {
         // do stuff with the data
         console.log(data);
+        var high = data.main.temp_max;
+        high = high * 9/5 + 32
+        var low = data.main.temp_min; 
+        low = low * 9/5 + 32
+        var description = data.weather[0].description; 
+        this.setState({high: high, low: low, description: description})
       })
       .catch(() => {
         console.log("Please search for a valid city 😩");
@@ -42,8 +53,12 @@ class WeatherApp extends React.Component{
   };
 
   render(){
-    this.getCurrent();
 
+    if (this.state.isFetching)
+    {
+      this.getCurrent();
+    }
+    
     return (
       <div className="App">
         <div id="header">
@@ -55,11 +70,11 @@ class WeatherApp extends React.Component{
         <header className="App-header">
           <img style={{width: "10%", height: "10%"}} src={logo} className="App-logo" alt="logo" />
           <p>
-            Sunny
+            {this.state.description}
           </p>
           <div style={{display: "flex"}}>
-            <p style={{marginRight: "30px"}}>High: 76°F</p>
-            <p>Low: 63°F</p>
+            <p style={{marginRight: "30px"}}>High: {this.state.high}°F</p>
+            <p>Low: {this.state.low}°F</p>
           </div>
           {/* <button id="myBtn" onclick="openModal('weekly')">Open Modal</button> */}
           <div id="hourlyWeather">
