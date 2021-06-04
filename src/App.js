@@ -25,7 +25,25 @@ class WeatherApp extends React.Component{
     }
   }
 
+  //submit form
+  getCurrent(){
+    console.log("current is loading")
+    const apiKey = "0a6ebe98851dbd7808eb9f98908964cf";
+    const url = `https://api.openweathermap.org/data/2.5/weather?id=4891382&appid=${apiKey}&units=metric`;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        // do stuff with the data
+        console.log(data);
+      })
+      .catch(() => {
+        console.log("Please search for a valid city 😩");
+      });
+  };
+
   render(){
+    this.getCurrent();
+
     return (
       <div className="App">
         <div id="header">
