@@ -2,6 +2,13 @@ import logo from './sun.png';
 import './App.css';
 import reactDom from 'react-dom';
 import React from 'react';
+import { WiCloudy } from "react-icons/wi";
+import { WiDaySunny } from "react-icons/wi";
+import { WiDayCloudy } from "react-icons/wi";
+import { WiDayShowers } from "react-icons/wi";
+import { WiRain } from "react-icons/wi";
+import { WiRainMix } from "react-icons/wi";
+
 
 class WeatherApp extends React.Component{
   constructor(props){
@@ -45,47 +52,47 @@ class WeatherApp extends React.Component{
                 <tr>
                   <td>1:00PM</td>
                   <td>57°F</td>
-                  <td>Clear</td>
+                  <td><WiDaySunny />Clear</td>
                 </tr>
                 <tr>
                 <td>2:00PM</td>
                   <td>57°F</td>
-                  <td>Cloudy</td>
+                  <td><WiCloudy /> Cloudy</td>
                 </tr>
                 <tr>
                 <td>3:00PM</td>
                   <td>57°F</td>
-                  <td>Partly Cloudy</td>
+                  <td><WiDayCloudy/>Partly Cloudy</td>
                 </tr>
                 <tr>
                 <td>4:00PM</td>
                   <td>57°F</td>
-                  <td>Showers</td>
+                  <td><WiDayShowers/>Showers</td>
                 </tr>
                 <tr>
                 <td>5:00PM</td>
                   <td>57°F</td>
-                  <td>Rain</td>
+                  <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>6:00PM</td>
                   <td>57°F</td>
-                  <td>Rain</td>
+                  <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>7:00PM</td>
                   <td>57°F</td>
-                  <td>Rain</td>
+                  <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>9:00PM</td>
                   <td>57°F</td>
-                  <td>Light Rain</td>
+                  <td><WiRainMix/>Light Rain</td>
                 </tr>
                 <tr>
                 <td>10:00PM</td>
                   <td>57°F</td>
-                  <td>Light Rain</td>
+                  <td><WiRainMix/>Light Rain</td>
                 </tr>
               </table>
               </div>
@@ -156,6 +163,7 @@ class WeatherApp extends React.Component{
       </div>
         </header>
       </div>
+      
       )
   }
 
@@ -167,7 +175,10 @@ function App() {
 
   
   return (
-    <WeatherApp />
+    <div>
+      <WeatherApp />
+    </div>
+    
   );
 
   
