@@ -18,8 +18,11 @@ class WeatherApp extends React.Component{
       hourlyClicked: false,
       weeklyClicked: false,
       high: 0,
-      low: 0, 
-      description: ""
+      low: 0,
+      feelslike: 0,
+      description: "",
+      today: this.getDate(),
+      image: logo
     }
   }
 
@@ -39,18 +42,37 @@ class WeatherApp extends React.Component{
       .then(response => response.json())
       .then(data => {
         // do stuff with the data
+        console.log("Current weather")
         console.log(data);
         var high = data.main.temp_max;
-        high = high * 9/5 + 32
+        high = Math.round(high * 9/5 + 32)
         var low = data.main.temp_min; 
-        low = low * 9/5 + 32
-        var description = data.weather[0].description; 
-        this.setState({high: high, low: low, description: description})
+        low = Math.round(low * 9/5 + 32)
+        var feelslike = data.main.feels_like;
+        console.log(feelslike)
+        feelslike = Math.round(feelslike * 9/5 + 32);
+        var description = data.weather[0].description;
+        console.log("Weather!")
+        var image = data.weather[0].icon;
+        image = `http://openweathermap.org/img/wn/${image}@2x.png`
+        console.log(image);
+        this.setState({high: high, low: low, feelslike: feelslike, description: description, image: image})
       })
       .catch(() => {
         console.log("Please search for a valid city 😩");
       });
   };
+
+  getDate(){
+    // Source: https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    return today
+  }
 
   render(){
 
@@ -63,15 +85,16 @@ class WeatherApp extends React.Component{
       <div className="App">
         <div id="header">
           <h1>E v a n s t o n W e a t h e r</h1>
-          <p id="subheader">May 26, 2021</p>
+          <p id="subheader">{this.state.today}</p>
         </div>
         <button onclick = "myFunction()" id="hourly"> Hourly Forecast</button>
         <button id="weekly">Weekly Forecast</button>
         <header className="App-header">
-          <img style={{width: "10%", height: "10%"}} src={logo} className="App-logo" alt="logo" />
+          <img src={this.state.image} className="App-logo" alt="logo" />
           <p>
             {this.state.description}
           </p>
+          <p>Feels like: {this.state.feelslike}°F</p>
           <div style={{display: "flex"}}>
             <p style={{marginRight: "30px"}}>High: {this.state.high}°F</p>
             <p>Low: {this.state.low}°F</p>
