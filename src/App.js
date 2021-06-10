@@ -78,6 +78,49 @@ class WeatherApp extends React.Component{
     return today
   }
 
+  randomTemp(){
+    var today = new Date();
+    var month = today.getMonth() + 1;
+    // June-August: 80s-90s
+    // May: 60-70s
+    // March-April: 40s-50s
+    // November, December, January-February: 20s-30s
+    // September: 40s
+    // October: 30s-40s
+    var min = 0;
+    var max = 0;
+    if (month <= 2 || month >= 11){
+      min = 20
+      max = 39
+    }
+    else if (month == 10){
+      min = 30
+      max = 39
+    }
+    else if (month == 9){
+      min = 40
+      max = 49
+    }
+    else if (6 >= month && month <= 8){
+      min = 80
+      max = 99
+    }
+    else if (month == 5){
+      min = 60
+      max = 79
+    }
+    else if (month == 4 || month == 3){
+      min = 40
+      max = 59
+    }
+    else{
+      min = 50
+      max = 55
+    }
+    var temp = Math.floor(Math.random() * (max-min)) + min;
+    return temp
+  }
+
   render(){
 
     if (this.state.isFetching)
@@ -116,47 +159,47 @@ class WeatherApp extends React.Component{
                 <table>
                 <tr>
                   <td>1:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiDaySunny />Clear</td>
                 </tr>
                 <tr>
                 <td>2:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiCloudy /> Cloudy</td>
                 </tr>
                 <tr>
                 <td>3:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiDayCloudy/>Partly Cloudy</td>
                 </tr>
                 <tr>
                 <td>4:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiDayShowers/>Showers</td>
                 </tr>
                 <tr>
                 <td>5:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>6:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>7:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiRain/>Rain</td>
                 </tr>
                 <tr>
                 <td>9:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiRainMix/>Light Rain</td>
                 </tr>
                 <tr>
                 <td>10:00PM</td>
-                  <td>57°F</td>
+                  <td>{this.randomTemp()}°F</td>
                   <td><WiRainMix/>Light Rain</td>
                 </tr>
               </table>
@@ -173,58 +216,51 @@ class WeatherApp extends React.Component{
           <div id="week">
           <div class="weekday">
               <h1>Sunday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/04d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Monday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/02d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Tuesday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/09d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Wednesday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/10d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Thursday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/01d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Friday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/02d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
             <div class="weekday">
               <h1>Saturday</h1>
-              <img style={{width: "100px", height: "100px"}} src={logo} alt="logo" />
+              <img style={{width: "100px", height: "100px"}} src={`http://openweathermap.org/img/wn/01d@2x.png`} alt="logo" />
               <div class="temp">
-                <p>High: 76°F</p>
-                <p>Low: 63°F</p>
+                <p>{this.randomTemp()}°F</p>
               </div>
             </div>
           </div>
