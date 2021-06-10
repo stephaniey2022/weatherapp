@@ -94,11 +94,15 @@ class WeatherApp extends React.Component{
         <button onClick={e => this.toggleHourly(e)} id="hourly">Hourly Forecast</button>
         <button onClick={e => this.toggleWeekly(e)} id="weekly">Weekly Forecast</button>
         <header className="App-header">
-          <img src={this.state.image} className="App-logo" alt="logo" />
-          <p>
-            {this.state.description}
-          </p>
-          <p>Feels like: {this.state.feelslike}°F</p>
+          <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <img src={this.state.image} className="App-logo" alt="logo" />
+            <div style={{alignItems: "center", justifyContent: "center"}}>
+              <h1 style={{fontSize: "xxx-large"}}>{this.state.feelslike}°F</h1>
+              <p>
+                {this.state.description}
+              </p>
+            </div>
+          </div>
           <div style={{display: "flex"}}>
             <p style={{marginRight: "30px"}}>High: {this.state.high}°F</p>
             <p>Low: {this.state.low}°F</p>
@@ -106,7 +110,7 @@ class WeatherApp extends React.Component{
 
           {this.state.showHourly ?
            <div id="hourlyWeather" class="modal">
-            <div class="modal-content">
+            <div class="modal-content" style={{margin: "5vh auto"}}>
               <span class="close" onClick={e => this.toggleHourly(e)}>&times;</span>
               <div id="week">
                 <table>
