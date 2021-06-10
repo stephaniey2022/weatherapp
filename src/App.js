@@ -15,8 +15,8 @@ class WeatherApp extends React.Component{
     super(props);
     this.state = {
       isFetching: true, 
-      hourlyClicked: false,
-      weeklyClicked: false,
+      showWeekly: false,
+      showHourly: false,
       high: 0,
       low: 0,
       feelslike: 0,
@@ -26,10 +26,14 @@ class WeatherApp extends React.Component{
     }
   }
 
-  tabClick(){
-    if (this.state.hourlyClicked){
-      this.setState({ hourlyClicked: false, weeklyClicked: true })
-    }
+  //popup modal for weekly forecast
+  toggleWeekly(){
+    this.setState({showWeekly: !this.state.showWeekly});
+  }
+
+  //popup modal for hourly forecast
+  toggleHourly(){
+    this.setState({showHourly: !this.state.showHourly});
   }
 
   //submit form
@@ -87,8 +91,8 @@ class WeatherApp extends React.Component{
           <h1>E v a n s t o n W e a t h e r</h1>
           <p id="subheader">{this.state.today}</p>
         </div>
-        <button onclick = "myFunction()" id="hourly"> Hourly Forecast</button>
-        <button id="weekly">Weekly Forecast</button>
+        <button onClick={e => this.toggleHourly(e)} id="hourly">Hourly Forecast</button>
+        <button onClick={e => this.toggleWeekly(e)} id="weekly">Weekly Forecast</button>
         <header className="App-header">
           <img src={this.state.image} className="App-logo" alt="logo" />
           <p>
@@ -99,10 +103,11 @@ class WeatherApp extends React.Component{
             <p style={{marginRight: "30px"}}>High: {this.state.high}°F</p>
             <p>Low: {this.state.low}°F</p>
           </div>
-          {/* <button id="myBtn" onclick="openModal('weekly')">Open Modal</button> */}
-          <div id="hourlyWeather">
+
+          {this.state.showHourly ?
+           <div id="hourlyWeather" class="modal">
             <div class="modal-content">
-              <span class="close">&times;</span>
+              <span class="close" onClick={e => this.toggleHourly(e)}>&times;</span>
               <div id="week">
                 <table>
                 <tr>
@@ -153,10 +158,14 @@ class WeatherApp extends React.Component{
               </table>
               </div>
             </div>
-          </div>  
-          <div id="weeklyWeather" >
+            </div> 
+            : null
+          } 
+           
+        {this.state.showWeekly ?
+        <div id="weeklyWeather" class="modal"> 
         <div class="modal-content">
-          <span class="close">&times;</span>
+          <span class="close" onClick={e => this.toggleWeekly(e)}>&times;</span>
           <div id="week">
           <div class="weekday">
               <h1>Sunday</h1>
@@ -216,7 +225,10 @@ class WeatherApp extends React.Component{
             </div>
           </div>
         </div>
-      </div>
+        </div>
+        : null
+        }
+      
         </header>
       </div>
       
